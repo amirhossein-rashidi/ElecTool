@@ -1,0 +1,12 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>12.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Version>0.1.0</Version>
+    <Company>ElecTool</Company>
+    <Product>ElecTool</Product>
+    <!-- Folder where AutoCAD 2026 is installed. Override with: dotnet build -p:AcadDir="D:\Apps\AutoCAD 2026" -->
+    <AcadDir Condition="'$(AcadDir)' == ''">C:\Program Files\Autodesk\AutoCAD 2026</AcadDir>
+  </PropertyGroup>
+</Project>
