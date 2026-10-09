@@ -1,0 +1,15 @@
+G:\Stream\Bot\ElecTool\src\ElecTool.AutoCAD\bin\Release\net8.0-windows\ElecTool.AutoCAD.deps.json
+G:\Stream\Bot\ElecTool\src\ElecTool.AutoCAD\bin\Release\net8.0-windows\ElecTool.AutoCAD.dll
+G:\Stream\Bot\ElecTool\src\ElecTool.AutoCAD\bin\Release\net8.0-windows\ElecTool.AutoCAD.pdb
+G:\Stream\Bot\ElecTool\src\ElecTool.AutoCAD\bin\Release\net8.0-windows\ElecTool.Core.dll
+G:\Stream\Bot\ElecTool\src\ElecTool.AutoCAD\bin\Release\net8.0-windows\ElecTool.Core.pdb
+G:\Stream\Bot\ElecTool\src\ElecTool.AutoCAD\obj\Release\net8.0-windows\ElecTool.AutoCAD.csproj.AssemblyReference.cache
+G:\Stream\Bot\ElecTool\src\ElecTool.AutoCAD\obj\Release\net8.0-windows\ElecTool.AutoCAD.GeneratedMSBuildEditorConfig.editorconfig
+G:\Stream\Bot\ElecTool\src\ElecTool.AutoCAD\obj\Release\net8.0-windows\ElecTool.AutoCAD.AssemblyInfoInputs.cache
+G:\Stream\Bot\ElecTool\src\ElecTool.AutoCAD\obj\Release\net8.0-windows\ElecTool.AutoCAD.AssemblyInfo.cs
+G:\Stream\Bot\ElecTool\src\ElecTool.AutoCAD\obj\Release\net8.0-windows\ElecTool.AutoCAD.csproj.CoreCompileInputs.cache
+G:\Stream\Bot\ElecTool\src\ElecTool.AutoCAD\obj\Release\net8.0-windows\ElecTool.334B555D.Up2Date
+G:\Stream\Bot\ElecTool\src\ElecTool.AutoCAD\obj\Release\net8.0-windows\ElecTool.AutoCAD.dll
+G:\Stream\Bot\ElecTool\src\ElecTool.AutoCAD\obj\Release\net8.0-windows\refint\ElecTool.AutoCAD.dll
+G:\Stream\Bot\ElecTool\src\ElecTool.AutoCAD\obj\Release\net8.0-windows\ElecTool.AutoCAD.pdb
+G:\Stream\Bot\ElecTool\src\ElecTool.AutoCAD\obj\Release\net8.0-windows\ref\ElecTool.AutoCAD.dll

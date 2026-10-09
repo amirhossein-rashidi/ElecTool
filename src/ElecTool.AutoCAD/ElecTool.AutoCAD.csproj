@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <AssemblyName>ElecTool.AutoCAD</AssemblyName>
+    <RootNamespace>ElecTool.AutoCAD</RootNamespace>
+    <PlatformTarget>x64</PlatformTarget>
+    <!-- AutoCAD's managed API uses WPF / WinForms types in its signatures. -->
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+  </PropertyGroup>
+
+  <!--
+    AutoCAD API assemblies are referenced from the INSTALLED AutoCAD (AcadDir, see Directory.Build.props).
+    Private=false means they are NOT copied to the output: AutoCAD already has them loaded.
+  -->
+  <ItemGroup>
+    <Reference Include="accoremgd">
+      <HintPath>$(AcadDir)\accoremgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="acdbmgd">
+      <HintPath>$(AcadDir)\acdbmgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="acmgd">
+      <HintPath>$(AcadDir)\acmgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ElecTool.Core\ElecTool.Core.csproj" />
+  </ItemGroup>
+
+</Project>
