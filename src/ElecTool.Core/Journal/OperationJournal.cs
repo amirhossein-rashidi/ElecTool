@@ -234,7 +234,7 @@ namespace ElecTool.Core.Journal
             try
             {
                 string json = File.ReadAllText(_filePath);
-                List<JournalEntry> loaded = JsonSerializer.Deserialize<List<JournalEntry>>(json, JsonOptions);
+                List<JournalEntry>? loaded = JsonSerializer.Deserialize<List<JournalEntry>>(json, JsonOptions);
                 _entries = loaded ?? new List<JournalEntry>();
             }
             catch
