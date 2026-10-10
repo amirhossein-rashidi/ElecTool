@@ -141,7 +141,35 @@ namespace ElecTool.Core.Localization
                     "No blocks were found in this drawing."),
                 ["blocks.done"] = (
                     "گزارش بلوک‌ها نوشته شد ({1} نوع بلوک، {2} نمونه). فایل: {0}",
-                    "Block report written ({1} block types, {2} instances). File: {0}")
+                    "Block report written ({1} block types, {2} instances). File: {0}"),
+
+                // ───────── بررسی نماد (ELECPICK، فقط‌خواندنی) ─────────
+
+                ["pick.prompt"] = (
+                    "اشیای یک نماد را انتخاب کنید (مثلاً با پنجره دور یک چراغ)؛ Enter = پایان انتخاب:",
+                    "Select the objects of one symbol (e.g. a window around one light); Enter = finish:"),
+                ["pick.count"] = ("تعداد اشیا: {0}", "Objects: {0}"),
+                ["pick.types"] = ("انواع: {0}", "Types: {0}"),
+                ["pick.layers"] = ("لایه‌ها: {0}", "Layers: {0}"),
+                ["pick.size"] = (
+                    "اندازه کل نماد: {0} × {1} (واحد نقشه)",
+                    "Overall symbol size: {0} x {1} (drawing units)"),
+                ["pick.block"] = (
+                    "بلوک: {0} | مقیاس: {1} | زاویه: {2}",
+                    "Block: {0} | scale: {1} | rotation: {2}"),
+                ["pick.blockMore"] = (
+                    "... و {0} بلوک دیگر",
+                    "... and {0} more block(s)"),
+                ["pick.labelPrompt"] = (
+                    "نام این نماد چیست؟ (مثلاً چراغ سقفی؛ Enter = بدون نام، Esc = ثبت نکن)",
+                    "What is this symbol? (e.g. ceiling light; Enter = no name, Esc = do not save)"),
+                ["pick.noLabel"] = ("(بدون نام)", "(no name)"),
+                ["pick.saved"] = (
+                    "ثبت شد. فایل گزارش: {0}",
+                    "Saved. Report file: {0}"),
+                ["pick.notSaved"] = (
+                    "ثبت نشد.",
+                    "Not saved.")
             };
     }
 }
