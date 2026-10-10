@@ -15,7 +15,9 @@ namespace ElecTool.AutoCAD
     /// فرمان‌های آزمایشی زیرساخت امن:
     /// ELECTEST = ساخت چند شیء آزمایشی از طریق OperationRunner
     /// ELECUNDO = پاک کردن فقط اشیای ثبت‌شده در آخرین عملیات (از طریق OperationRunner)
+    /// ELECBLOCKS = گزارش فقط‌خواندنی بلوک‌های نقشه (از طریق BlockInventory)
     /// تمام منطق امن (پشتیبان، ثبت، پیش‌نمایش، تأیید، بازگردانی) در OperationRunner است.
+    /// نکته: ELECBLOCKS موقتاً اینجاست چون این کلاس در Plugin.cs ثبت شده؛ بعداً به کلاس خودش منتقل می‌شود.
     /// </summary>
     public static class SafeOperationCommands
     {
@@ -78,6 +80,20 @@ namespace ElecTool.AutoCAD
             }
 
             OperationRunner.UndoLast(doc);
+        }
+
+        [Acrt.CommandMethod("ELECBLOCKS")]
+        public static void ListBlocks()
+        {
+            ElecRuntime.EnsureStarted();
+
+            Document doc = AcApp.DocumentManager.MdiActiveDocument;
+            if (doc == null)
+            {
+                return;
+            }
+
+            BlockInventory.Run(doc);
         }
 
         private static List<Entity> BuildTestEntities(Point3d center, double size)
