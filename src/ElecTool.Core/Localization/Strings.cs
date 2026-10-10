@@ -230,7 +230,32 @@ namespace ElecTool.Core.Localization
                     "Place all {0} symbols as blocks in the drawing? (ELECUNDO removes only these)"),
                 ["libtest.done"] = (
                     "انجام شد: {0} نماد چیده شد. برای پاک کردن فقط همین‌ها: ELECUNDO",
-                    "Done: {0} symbols were placed. To remove only these: ELECUNDO")
+                    "Done: {0} symbols were placed. To remove only these: ELECUNDO"),
+
+                // ───────── حذف نماد از کتابخانه (ELECLIBDEL) ─────────
+
+                ["libdel.intro"] = (
+                    "نمادهای کتابخانه:",
+                    "Library symbols:"),
+                ["libdel.item"] = ("{0}: {1}", "{0}: {1}"),
+                ["libdel.itemUsed"] = (
+                    "{0}: {1} (بلوک داخلی؛ در {2} استفاده شده)",
+                    "{0}: {1} (internal block; used by {2})"),
+                ["libdel.pickNumber"] = (
+                    "شماره نمادی که باید حذف شود (Esc = لغو): ",
+                    "Number of the symbol to delete (Esc = cancel): "),
+                ["libdel.inUse"] = (
+                    "«{0}» حذف نشد چون در این نمادها استفاده شده است: {1}. ابتدا آن نمادها را حذف کنید.",
+                    "\"{0}\" was not deleted because it is used by: {1}. Delete those symbols first."),
+                ["libdel.confirm"] = (
+                    "نماد «{0}» از کتابخانه حذف شود؟ (قبلش پشتیبان گرفته می‌شود؛ نقشه فعلی تغییر نمی‌کند)",
+                    "Delete symbol \"{0}\" from the library? (A backup is made first; the current drawing is not changed)"),
+                ["libdel.done"] = (
+                    "حذف شد: «{0}» از کتابخانه. نقشه فعلی تغییر نکرد.",
+                    "Deleted: \"{0}\" from the library. The current drawing was not changed."),
+                ["libdel.failed"] = (
+                    "حذف از کتابخانه ناموفق بود: {0}",
+                    "Deleting from the library failed: {0}")
             };
     }
 }
