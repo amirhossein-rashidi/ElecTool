@@ -9,6 +9,7 @@ using Acrt = Autodesk.AutoCAD.Runtime;
 [assembly: Acrt.CommandClass(typeof(ElecTool.AutoCAD.SymbolLibraryCommands))]
 [assembly: Acrt.CommandClass(typeof(ElecTool.AutoCAD.SymbolLibraryReportCommands))]
 [assembly: Acrt.CommandClass(typeof(ElecTool.AutoCAD.SymbolLibraryTestCommands))]
+[assembly: Acrt.CommandClass(typeof(ElecTool.AutoCAD.SymbolLibraryDeleteCommands))]
 
 namespace ElecTool.AutoCAD
 {
