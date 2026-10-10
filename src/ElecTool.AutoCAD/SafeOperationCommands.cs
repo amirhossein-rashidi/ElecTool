@@ -20,7 +20,7 @@ namespace ElecTool.AutoCAD
     /// فرمان‌های آزمایشی زیرساخت امن:
     /// ELECTEST = پشتیبان + ثبت + پیش‌نمایش + تأیید + ساخت چند شیء آزمایشی
     /// ELECUNDO = پاک کردن فقط اشیای ثبت‌شده در آخرین عملیات
-    /// نکته: متن‌های این فایل موقتاً همین‌جاست و بعداً به Strings (فا/En) منتقل می‌شود.
+    /// همه متن‌های کاربر از Strings (فا/En) خوانده می‌شود. اگر ابزار غیرفعال باشد، فرمان‌ها اجرا نمی‌شوند.
     /// </summary>
     public static class SafeOperationCommands
     {
@@ -31,6 +31,8 @@ namespace ElecTool.AutoCAD
         [Acrt.CommandMethod("ELECTEST")]
         public static void RunTestOperation()
         {
+            ElecRuntime.EnsureStarted();
+
             Document doc = AcApp.DocumentManager.MdiActiveDocument;
             if (doc == null)
             {
@@ -39,6 +41,11 @@ namespace ElecTool.AutoCAD
 
             Editor ed = doc.Editor;
 
+            if (!IsToolEnabled(ed))
+            {
+                return;
+            }
+
             string dwgPath;
             if (!TryGetSavedDrawing(doc, ed, out dwgPath))
             {
@@ -46,11 +53,11 @@ namespace ElecTool.AutoCAD
             }
 
             // ۱) گرفتن نقطه
-            var pointOptions = new PromptPointOptions("\nنقطه آزمایش را انتخاب کنید (Esc = لغو): ");
+            var pointOptions = new PromptPointOptions("\n" + T("op.test.pickPoint"));
             PromptPointResult pointResult = ed.GetPoint(pointOptions);
             if (pointResult.Status != PromptStatus.OK)
             {
-                Say(ed, "لغو شد. هیچ تغییری در نقشه ایجاد نشد.");
+                Say(ed, T("op.cancelled"));
                 return;
             }
 
@@ -80,7 +87,7 @@ namespace ElecTool.AutoCAD
                         noViewports);
                 }
 
-                approved = AskYesNo(ed, "\nاین پیش‌نمایش (زرد) اعمال شود؟");
+                approved = AskYesNo(ed, "\n" + T("op.test.confirm"));
             }
             finally
             {
@@ -93,7 +100,7 @@ namespace ElecTool.AutoCAD
 
             if (!approved)
             {
-                Say(ed, "اعمال نشد. هیچ تغییری در نقشه ایجاد نشد.");
+                Say(ed, T("op.notApplied"));
                 return;
             }
 
@@ -114,7 +121,7 @@ namespace ElecTool.AutoCAD
             }
             catch (Exception ex)
             {
-                Say(ed, "ثبت عملیات ممکن نشد؛ عملیات انجام نشد: " + ex.Message);
+                Say(ed, T("op.journal.beginFailed", ex.Message));
                 return;
             }
 
@@ -122,12 +129,12 @@ namespace ElecTool.AutoCAD
             {
                 CreateAndRecord(doc, journal, id, center, size);
                 journal.Complete(id);
-                Say(ed, "انجام شد: ۳ شیء آزمایشی ساخته شد. برای پاک کردن فقط همین‌ها: ELECUNDO");
+                Say(ed, T("op.test.done"));
             }
             catch (Exception ex)
             {
                 try { journal.Cancel(id); } catch { }
-                Say(ed, "خطا در ساخت؛ تغییری در نقشه ثبت نشد: " + ex.Message);
+                Say(ed, T("op.test.failed", ex.Message));
             }
         }
 
@@ -176,6 +183,8 @@ namespace ElecTool.AutoCAD
         [Acrt.CommandMethod("ELECUNDO")]
         public static void UndoLastOperation()
         {
+            ElecRuntime.EnsureStarted();
+
             Document doc = AcApp.DocumentManager.MdiActiveDocument;
             if (doc == null)
             {
@@ -183,6 +192,11 @@ namespace ElecTool.AutoCAD
             }
 
             Editor ed = doc.Editor;
+
+            if (!IsToolEnabled(ed))
+            {
+                return;
+            }
 
             string dwgPath;
             if (!TryGetSavedDrawing(doc, ed, out dwgPath))
@@ -197,25 +211,24 @@ namespace ElecTool.AutoCAD
             }
             catch (Exception ex)
             {
-                Say(ed, "خواندن ثبت عملیات ممکن نشد: " + ex.Message);
+                Say(ed, T("op.undo.readFailed", ex.Message));
                 return;
             }
 
             IReadOnlyList<JournalEntry> undoable = journal.GetUndoable();
             if (undoable.Count == 0)
             {
-                Say(ed, "چیزی برای بازگردانی در این نقشه ثبت نشده است.");
+                Say(ed, T("op.undo.nothing"));
                 return;
             }
 
             JournalEntry target = undoable[0];
             string when = target.StartedAt.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
-            Say(ed, "آخرین عملیات: " + target.Name + " | " + when + " | "
-                    + target.Handles.Count.ToString(CultureInfo.InvariantCulture) + " شیء");
+            Say(ed, T("op.undo.last", target.Name, when, target.Handles.Count.ToString(CultureInfo.InvariantCulture)));
 
-            if (!AskYesNo(ed, "\nفقط همین اشیای ساخته‌شده توسط ابزار پاک شوند؟"))
+            if (!AskYesNo(ed, "\n" + T("op.undo.confirm")))
             {
-                Say(ed, "لغو شد. هیچ تغییری در نقشه ایجاد نشد.");
+                Say(ed, T("op.cancelled"));
                 return;
             }
 
@@ -230,8 +243,8 @@ namespace ElecTool.AutoCAD
             string error;
             if (!TryEraseHandles(doc, target, out erased, out missing, out error))
             {
-                Say(ed, "بازگردانی انجام نشد و چیزی پاک نشد: " + error);
-                Say(ed, "اگر لایه قفل است، قفل را باز کنید و دوباره ELECUNDO بزنید.");
+                Say(ed, T("op.undo.failed", error));
+                Say(ed, T("op.undo.layerHint"));
                 return;
             }
 
@@ -241,12 +254,14 @@ namespace ElecTool.AutoCAD
             }
             catch (Exception ex)
             {
-                Say(ed, "اشیا پاک شدند ولی ثبت وضعیت ناموفق بود: " + ex.Message);
+                Say(ed, T("op.undo.markFailed", ex.Message));
                 return;
             }
 
-            Say(ed, "بازگردانی شد. پاک‌شده: " + erased.ToString(CultureInfo.InvariantCulture)
-                    + " | قبلاً حذف‌شده: " + missing.ToString(CultureInfo.InvariantCulture));
+            Say(ed, T(
+                "op.undo.done",
+                erased.ToString(CultureInfo.InvariantCulture),
+                missing.ToString(CultureInfo.InvariantCulture)));
         }
 
         private static bool TryEraseHandles(
@@ -266,7 +281,7 @@ namespace ElecTool.AutoCAD
                     long value;
                     if (!long.TryParse(text, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out value))
                     {
-                        error = "شناسه نامعتبر: " + text;
+                        error = T("op.undo.badHandle", text);
                         return false;
                     }
 
@@ -298,6 +313,24 @@ namespace ElecTool.AutoCAD
 
         // ───────────────────────── کمکی‌ها ─────────────────────────
 
+        /// <summary>متن کاربر را از Strings و به زبان انتخاب‌شده می‌گیرد.</summary>
+        private static string T(string key, params object[] args)
+        {
+            return ElecRuntime.Localizer.Get(key, args);
+        }
+
+        /// <summary>اگر ابزار غیرفعال باشد پیام می‌دهد و false برمی‌گرداند.</summary>
+        private static bool IsToolEnabled(Editor ed)
+        {
+            if (ElecRuntime.Settings.Current.Enabled)
+            {
+                return true;
+            }
+
+            Say(ed, T("op.disabled"));
+            return false;
+        }
+
         private static bool TryGetSavedDrawing(Document doc, Editor ed, out string path)
         {
             path = string.Empty;
@@ -305,14 +338,14 @@ namespace ElecTool.AutoCAD
 
             if (string.IsNullOrWhiteSpace(file) || !File.Exists(file))
             {
-                Say(ed, "این نقشه هنوز ذخیره نشده. ابتدا آن را ذخیره کنید (QSAVE).");
+                Say(ed, T("op.notSaved"));
                 return false;
             }
 
             int modified = Convert.ToInt32(AcCore.GetSystemVariable("DBMOD"), CultureInfo.InvariantCulture);
             if (modified != 0)
             {
-                Say(ed, "تغییرات ذخیره‌نشده دارید. برای امنیت پشتیبان، ابتدا QSAVE بزنید و دوباره اجرا کنید.");
+                Say(ed, T("op.unsaved"));
                 return false;
             }
 
@@ -329,15 +362,15 @@ namespace ElecTool.AutoCAD
 
             if (!result.Success)
             {
-                Say(ed, "پشتیبان‌گیری ناموفق بود؛ عملیات انجام نشد: " + result.ErrorMessage);
+                Say(ed, T("op.backup.failed", result.ErrorMessage));
                 return false;
             }
 
             backupPath = result.BackupPath;
-            Say(ed, "پشتیبان ساخته شد: " + result.BackupPath);
+            Say(ed, T("op.backup.created", result.BackupPath));
             if (result.UsedFallbackFolder)
             {
-                Say(ed, "(پوشه کنار فایل قابل‌نوشتن نبود؛ از مسیر جایگزین استفاده شد.)");
+                Say(ed, T("op.backup.fallback"));
             }
 
             return true;
