@@ -17,7 +17,8 @@ namespace ElecTool.AutoCAD
     /// ELECUNDO = پاک کردن فقط اشیای ثبت‌شده در آخرین عملیات (از طریق OperationRunner)
     /// ELECBLOCKS = گزارش فقط‌خواندنی بلوک‌های نقشه (از طریق BlockInventory)
     /// تمام منطق امن (پشتیبان، ثبت، پیش‌نمایش، تأیید، بازگردانی) در OperationRunner است.
-    /// نکته: ELECBLOCKS موقتاً اینجاست چون این کلاس در Plugin.cs ثبت شده؛ بعداً به کلاس خودش منتقل می‌شود.
+    /// ELECPICK = بررسی فقط‌خواندنی یک نماد و ثبت نام آن (از طریق SymbolInspector)
+    /// نکته: ELECBLOCKS و ELECPICK موقتاً اینجا هستند چون این کلاس در Plugin.cs ثبت شده؛ بعداً به کلاس خودش منتقل می‌شود.
     /// </summary>
     public static class SafeOperationCommands
     {
@@ -94,6 +95,20 @@ namespace ElecTool.AutoCAD
             }
 
             BlockInventory.Run(doc);
+        }
+
+        [Acrt.CommandMethod("ELECPICK")]
+        public static void InspectSymbol()
+        {
+            ElecRuntime.EnsureStarted();
+
+            Document doc = AcApp.DocumentManager.MdiActiveDocument;
+            if (doc == null)
+            {
+                return;
+            }
+
+            SymbolInspector.Run(doc);
         }
 
         private static List<Entity> BuildTestEntities(Point3d center, double size)
