@@ -169,7 +169,34 @@ namespace ElecTool.Core.Localization
                     "Saved. Report file: {0}"),
                 ["pick.notSaved"] = (
                     "ثبت نشد.",
-                    "Not saved.")
+                    "Not saved."),
+
+                // ───────── کتابخانه نمادها (ELECSAVE) ─────────
+
+                ["lib.namePrompt"] = (
+                    "نام نماد در کتابخانه چیست؟ (مثلاً چراغ سقفی؛ Esc = لغو): ",
+                    "What is the symbol name in the library? (e.g. ceiling light; Esc = cancel): "),
+                ["lib.nameInvalid"] = (
+                    "این نام برای بلوک مجاز نیست (نویسه‌هایی مثل < > / : ; ? * | , = ممنوع‌اند). دوباره ELECSAVE بزنید.",
+                    "This name is not allowed for a block (characters like < > / : ; ? * | , = are not allowed). Run ELECSAVE again."),
+                ["lib.exists"] = (
+                    "نمادی با نام «{0}» در کتابخانه هست؛ چیزی بازنویسی نشد. با نام دیگری دوباره ELECSAVE بزنید.",
+                    "A symbol named \"{0}\" already exists in the library; nothing was overwritten. Run ELECSAVE again with another name."),
+                ["lib.pointPrompt"] = (
+                    "نقطه درج نماد را کلیک کنید (مثلاً مرکز چراغ؛ Esc = لغو): ",
+                    "Click the symbol insertion point (e.g. the light center; Esc = cancel): "),
+                ["lib.summary"] = (
+                    "نماد: {0} | {1} شیء | اندازه: {2} × {3} متر | کتابخانه: {4}",
+                    "Symbol: {0} | {1} object(s) | size: {2} x {3} m | library: {4}"),
+                ["lib.confirm"] = (
+                    "این اشیا (زرد) به‌صورت بلوک در کتابخانه ذخیره شوند؟ (نقشه فعلی تغییر نمی‌کند)",
+                    "Save these objects (yellow) as a block in the library? (The current drawing is not changed)"),
+                ["lib.done"] = (
+                    "ذخیره شد: «{0}» در کتابخانه. نقشه فعلی تغییر نکرد.",
+                    "Saved: \"{0}\" in the library. The current drawing was not changed."),
+                ["lib.failed"] = (
+                    "ذخیره در کتابخانه ناموفق بود؛ نماد جدیدی ثبت نشد: {0}",
+                    "Saving to the library failed; no new symbol was recorded: {0}")
             };
     }
 }
