@@ -214,7 +214,23 @@ namespace ElecTool.Core.Localization
                     "Library report written ({1} symbols). File: {0}"),
                 ["lib.report.failed"] = (
                     "خواندن یا نوشتن گزارش کتابخانه ممکن نشد: {0}",
-                    "Could not read the library or write the report: {0}")
+                    "Could not read the library or write the report: {0}"),
+
+                // ───────── چیدن آزمایشی نمادها (ELECLIBTEST) ─────────
+
+                ["libtest.intro"] = (
+                    "نمادهای کتابخانه (به ترتیب چیدمان: از چپ به راست، ردیف‌به‌ردیف از بالا):",
+                    "Library symbols (in layout order: left to right, row by row from the top):"),
+                ["libtest.item"] = ("{0}: {1}", "{0}: {1}"),
+                ["libtest.pickPoint"] = (
+                    "نقطه شروع چیدمان را انتخاب کنید (گوشه بالا-چپ، در جای خالی نقشه؛ Esc = لغو): ",
+                    "Pick the layout start point (top-left corner, in an empty area; Esc = cancel): "),
+                ["libtest.confirm"] = (
+                    "همه {0} نماد به‌صورت بلوک در نقشه چیده شوند؟ (با ELECUNDO فقط همین‌ها پاک می‌شوند)",
+                    "Place all {0} symbols as blocks in the drawing? (ELECUNDO removes only these)"),
+                ["libtest.done"] = (
+                    "انجام شد: {0} نماد چیده شد. برای پاک کردن فقط همین‌ها: ELECUNDO",
+                    "Done: {0} symbols were placed. To remove only these: ELECUNDO")
             };
     }
 }
