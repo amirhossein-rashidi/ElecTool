@@ -196,7 +196,25 @@ namespace ElecTool.Core.Localization
                     "Saved: \"{0}\" in the library. The current drawing was not changed."),
                 ["lib.failed"] = (
                     "ذخیره در کتابخانه ناموفق بود؛ نماد جدیدی ثبت نشد: {0}",
-                    "Saving to the library failed; no new symbol was recorded: {0}")
+                    "Saving to the library failed; no new symbol was recorded: {0}"),
+
+                // ───────── گزارش کتابخانه (ELECLIB، فقط‌خواندنی) ─────────
+
+                ["lib.report.noLibrary"] = (
+                    "کتابخانه‌ای هنوز ساخته نشده. ابتدا با ELECSAVE یک نماد ثبت کنید.",
+                    "No library has been created yet. Save a symbol with ELECSAVE first."),
+                ["lib.report.empty"] = (
+                    "فایل کتابخانه هست ولی نمادی در آن پیدا نشد.",
+                    "The library file exists but no symbols were found in it."),
+                ["lib.report.item"] = (
+                    "{0} | {1} | {2} × {3} متر",
+                    "{0} | {1} | {2} x {3} m"),
+                ["lib.report.done"] = (
+                    "گزارش کتابخانه نوشته شد ({1} نماد). فایل: {0}",
+                    "Library report written ({1} symbols). File: {0}"),
+                ["lib.report.failed"] = (
+                    "خواندن یا نوشتن گزارش کتابخانه ممکن نشد: {0}",
+                    "Could not read the library or write the report: {0}")
             };
     }
 }
