@@ -69,8 +69,8 @@ namespace ElecTool.AutoCAD
             for (int i = 0; i < names.Count; i++)
             {
                 string number = (i + 1).ToString(CultureInfo.InvariantCulture);
-                List<string> users;
-                if (usedBy.TryGetValue(names[i], out users) && users.Count > 0)
+                List<string>? users;
+                if (usedBy.TryGetValue(names[i], out users) && users != null && users.Count > 0)
                 {
                     OperationRunner.Say(ed, OperationRunner.T(
                         "libdel.itemUsed", number, names[i], string.Join("، ", users)));
@@ -97,8 +97,8 @@ namespace ElecTool.AutoCAD
             string name = names[numberResult.Value - 1];
 
             // ۴) اگر نماد دیگری به این بلوک وابسته است، حذف نکن
-            List<string> blockers;
-            if (usedBy.TryGetValue(name, out blockers) && blockers.Count > 0)
+            List<string>? blockers;
+            if (usedBy.TryGetValue(name, out blockers) && blockers != null && blockers.Count > 0)
             {
                 OperationRunner.Say(ed, OperationRunner.T(
                     "libdel.inUse", name, string.Join("، ", blockers)));
@@ -238,8 +238,8 @@ namespace ElecTool.AutoCAD
                             continue;
                         }
 
-                        List<string> users;
-                        if (!usedBy.TryGetValue(target.Name, out users))
+                        List<string>? users;
+                        if (!usedBy.TryGetValue(target.Name, out users) || users == null)
                         {
                             users = new List<string>();
                             usedBy[target.Name] = users;
