@@ -7,6 +7,7 @@ using Acrt = Autodesk.AutoCAD.Runtime;
 [assembly: Acrt.CommandClass(typeof(ElecTool.AutoCAD.ElecCommands))]
 [assembly: Acrt.CommandClass(typeof(ElecTool.AutoCAD.SafeOperationCommands))]
 [assembly: Acrt.CommandClass(typeof(ElecTool.AutoCAD.SymbolLibraryCommands))]
+[assembly: Acrt.CommandClass(typeof(ElecTool.AutoCAD.SymbolLibraryReportCommands))]
 
 namespace ElecTool.AutoCAD
 {
