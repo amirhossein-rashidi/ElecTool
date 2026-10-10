@@ -117,7 +117,7 @@ namespace ElecTool.AutoCAD
                             continue;
                         }
 
-                        Row row;
+                        Row? row;
                         if (!map.TryGetValue(definition.Name, out row))
                         {
                             row = new Row(definition.Name);
