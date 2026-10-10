@@ -6,6 +6,7 @@ using Acrt = Autodesk.AutoCAD.Runtime;
 [assembly: Acrt.ExtensionApplication(typeof(ElecTool.AutoCAD.Plugin))]
 [assembly: Acrt.CommandClass(typeof(ElecTool.AutoCAD.ElecCommands))]
 [assembly: Acrt.CommandClass(typeof(ElecTool.AutoCAD.SafeOperationCommands))]
+[assembly: Acrt.CommandClass(typeof(ElecTool.AutoCAD.SymbolLibraryCommands))]
 
 namespace ElecTool.AutoCAD
 {
