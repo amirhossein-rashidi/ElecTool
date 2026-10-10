@@ -132,7 +132,16 @@ namespace ElecTool.Core.Localization
                     "Undone. Erased: {0} | already removed: {1}"),
                 ["op.undo.badHandle"] = (
                     "شناسه نامعتبر: {0}",
-                    "Invalid handle: {0}")
+                    "Invalid handle: {0}"),
+
+                // ───────── گزارش بلوک‌ها (ELECBLOCKS، فقط‌خواندنی) ─────────
+
+                ["blocks.empty"] = (
+                    "هیچ بلوکی در این نقشه پیدا نشد.",
+                    "No blocks were found in this drawing."),
+                ["blocks.done"] = (
+                    "گزارش بلوک‌ها نوشته شد ({1} نوع بلوک، {2} نمونه). فایل: {0}",
+                    "Block report written ({1} block types, {2} instances). File: {0}")
             };
     }
 }
