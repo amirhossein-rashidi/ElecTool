@@ -59,7 +59,80 @@ namespace ElecTool.Core.Localization
 
                 ["error.generic"] = (
                     "خطایی رخ داد و عملیات متوقف شد: {0} (جزئیات در فایل گزارش ثبت شد.)",
-                    "An error occurred and the operation was stopped: {0} (details were written to the log file.)")
+                    "An error occurred and the operation was stopped: {0} (details were written to the log file.)"),
+
+                // ───────── فرمان‌های زیرساخت امن (ELECTEST / ELECUNDO) ─────────
+
+                ["op.disabled"] = (
+                    "ElecTool غیرفعال است. برای فعال‌سازی ابتدا فرمان ELEC را بزنید.",
+                    "ElecTool is disabled. Type ELEC first to enable it."),
+
+                ["op.notSaved"] = (
+                    "این نقشه هنوز ذخیره نشده. ابتدا آن را ذخیره کنید (QSAVE).",
+                    "This drawing has not been saved yet. Save it first (QSAVE)."),
+                ["op.unsaved"] = (
+                    "نقشه تغییر ذخیره‌نشده دارد (بعد از ELECTEST یا ELECUNDO هم این پیام طبیعی است). برای امنیت پشتیبان، ابتدا QSAVE بزنید و دوباره اجرا کنید.",
+                    "The drawing has unsaved changes (this is normal right after ELECTEST or ELECUNDO too). For a safe backup, type QSAVE first and run the command again."),
+
+                ["op.cancelled"] = (
+                    "لغو شد. هیچ تغییری در نقشه ایجاد نشد.",
+                    "Cancelled. No change was made to the drawing."),
+                ["op.notApplied"] = (
+                    "اعمال نشد. هیچ تغییری در نقشه ایجاد نشد.",
+                    "Not applied. No change was made to the drawing."),
+
+                ["op.backup.created"] = ("پشتیبان ساخته شد: {0}", "Backup created: {0}"),
+                ["op.backup.fallback"] = (
+                    "(پوشه کنار فایل قابل‌نوشتن نبود؛ از مسیر جایگزین استفاده شد.)",
+                    "(The folder next to the file was not writable; the fallback location was used.)"),
+                ["op.backup.failed"] = (
+                    "پشتیبان‌گیری ناموفق بود؛ عملیات انجام نشد: {0}",
+                    "Backup failed; the operation was not performed: {0}"),
+
+                ["op.journal.beginFailed"] = (
+                    "ثبت عملیات ممکن نشد؛ عملیات انجام نشد: {0}",
+                    "Could not record the operation; nothing was done: {0}"),
+
+                ["op.test.pickPoint"] = (
+                    "نقطه آزمایش را انتخاب کنید (Esc = لغو): ",
+                    "Pick the test point (Esc = cancel): "),
+                ["op.test.confirm"] = (
+                    "این پیش‌نمایش (زرد) اعمال شود؟",
+                    "Apply this preview (yellow)?"),
+                ["op.test.done"] = (
+                    "انجام شد: ۳ شیء آزمایشی ساخته شد. برای پاک کردن فقط همین‌ها: ELECUNDO",
+                    "Done: 3 test objects were created. To remove only these: ELECUNDO"),
+                ["op.test.failed"] = (
+                    "خطا در ساخت؛ تغییری در نقشه ثبت نشد: {0}",
+                    "Error while creating; no change was recorded in the drawing: {0}"),
+
+                ["op.undo.readFailed"] = (
+                    "خواندن ثبت عملیات ممکن نشد: {0}",
+                    "Could not read the operation journal: {0}"),
+                ["op.undo.nothing"] = (
+                    "چیزی برای بازگردانی در این نقشه ثبت نشده است.",
+                    "There is nothing to undo in this drawing."),
+                ["op.undo.last"] = (
+                    "آخرین عملیات: {0} | {1} | {2} شیء",
+                    "Last operation: {0} | {1} | {2} object(s)"),
+                ["op.undo.confirm"] = (
+                    "فقط همین اشیای ساخته‌شده توسط ابزار پاک شوند؟",
+                    "Erase only these objects created by the tool?"),
+                ["op.undo.failed"] = (
+                    "بازگردانی انجام نشد و چیزی پاک نشد: {0}",
+                    "Undo failed and nothing was erased: {0}"),
+                ["op.undo.layerHint"] = (
+                    "اگر لایه قفل است، قفل را باز کنید و دوباره ELECUNDO بزنید.",
+                    "If a layer is locked, unlock it and run ELECUNDO again."),
+                ["op.undo.markFailed"] = (
+                    "اشیا پاک شدند ولی ثبت وضعیت ناموفق بود: {0}",
+                    "The objects were erased but recording the status failed: {0}"),
+                ["op.undo.done"] = (
+                    "بازگردانی شد. پاک‌شده: {0} | قبلاً حذف‌شده: {1}",
+                    "Undone. Erased: {0} | already removed: {1}"),
+                ["op.undo.badHandle"] = (
+                    "شناسه نامعتبر: {0}",
+                    "Invalid handle: {0}")
             };
     }
 }
