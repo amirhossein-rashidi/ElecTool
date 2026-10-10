@@ -1,9 +1,11 @@
 using System;
 using Acrt = Autodesk.AutoCAD.Runtime;
 
-// AutoCAD reads these two attributes when it loads the DLL.
+// AutoCAD reads these attributes when it loads the DLL.
+// Every class that contains commands must be listed here.
 [assembly: Acrt.ExtensionApplication(typeof(ElecTool.AutoCAD.Plugin))]
 [assembly: Acrt.CommandClass(typeof(ElecTool.AutoCAD.ElecCommands))]
+[assembly: Acrt.CommandClass(typeof(ElecTool.AutoCAD.SafeOperationCommands))]
 
 namespace ElecTool.AutoCAD
 {
