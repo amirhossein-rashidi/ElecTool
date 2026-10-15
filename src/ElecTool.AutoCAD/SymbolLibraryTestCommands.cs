@@ -262,6 +262,7 @@ namespace ElecTool.AutoCAD
             using (Transaction tr = db.TransactionManager.StartTransaction())
             {
                 var table = (BlockTable)tr.GetObject(db.BlockTableId, OpenMode.ForRead);
+                HashSet<string> internalBlocks = SymbolLibraryHelper.FindInternalBlocks(tr, table);
 
                 foreach (ObjectId id in table)
                 {
@@ -269,6 +270,12 @@ namespace ElecTool.AutoCAD
 
                     if (btr.IsLayout || btr.IsAnonymous ||
                         btr.IsFromExternalReference || btr.IsFromOverlayReference)
+                    {
+                        continue;
+                    }
+
+                    // بلوک داخلی (مثل L88) نماد مستقل نیست؛ موقع چیدن خودش همراه نماد می‌آید.
+                    if (internalBlocks.Contains(btr.Name))
                     {
                         continue;
                     }
