@@ -11,6 +11,7 @@ using Acrt = Autodesk.AutoCAD.Runtime;
 [assembly: Acrt.CommandClass(typeof(ElecTool.AutoCAD.SymbolLibraryReportCommands))]
 [assembly: Acrt.CommandClass(typeof(ElecTool.AutoCAD.SymbolLibraryTestCommands))]
 [assembly: Acrt.CommandClass(typeof(ElecTool.AutoCAD.SymbolLibraryDeleteCommands))]
+[assembly: Acrt.CommandClass(typeof(ElecTool.AutoCAD.SymbolInsertCommands))]
 
 namespace ElecTool.AutoCAD
 {
