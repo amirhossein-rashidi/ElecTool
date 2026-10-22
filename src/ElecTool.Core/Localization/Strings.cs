@@ -255,7 +255,32 @@ namespace ElecTool.Core.Localization
                     "Deleted: \"{0}\" from the library. The current drawing was not changed."),
                 ["libdel.failed"] = (
                     "حذف از کتابخانه ناموفق بود: {0}",
-                    "Deleting from the library failed: {0}")
+                    "Deleting from the library failed: {0}"),
+
+                // ───────── درج نماد (ELECINSERT) ─────────
+
+                ["insert.intro"] = (
+                    "نمادهای کتابخانه:",
+                    "Library symbols:"),
+                ["insert.item"] = ("{0}: {1}", "{0}: {1}"),
+                ["insert.pickNumber"] = (
+                    "شماره نماد (Esc = لغو)",
+                    "Symbol number (Esc = cancel)"),
+                ["insert.pickPoint"] = (
+                    "جای درج نماد را کلیک کنید (Enter یا Esc = پایان): ",
+                    "Click the insertion point (Enter or Esc = finish): "),
+                ["insert.pickAngle"] = (
+                    "موس را بچرخانید و کلیک کنید (Enter = بدون چرخش؛ Angle = تایپ زاویه) [Angle]: ",
+                    "Move the mouse to rotate and click (Enter = no rotation; Angle = type angle) [Angle]: "),
+                ["insert.angleDegrees"] = (
+                    "زاویه به درجه <0>: ",
+                    "Angle in degrees <0>: "),
+                ["insert.done"] = (
+                    "پایان درج «{0}»: {1} عدد درج شد. برای برگرداندن، فرمان U را بزنید.",
+                    "Finished inserting \"{0}\": {1} placed. To undo, type U."),
+                ["insert.failed"] = (
+                    "درج نماد ناموفق بود: {0}",
+                    "Inserting the symbol failed: {0}")
             };
     }
 }
