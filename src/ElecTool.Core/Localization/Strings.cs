@@ -288,11 +288,14 @@ namespace ElecTool.Core.Localization
                 // ───────── بررسی شیت‌ها (ELECSHEETINFO) ─────────
 
                 ["sheet.pickBig"] = (
-                    "روی خط مستطیل بزرگ دور جدول شیت‌ها کلیک کنید (Esc = لغو): ",
-                    "Click the line of the big rectangle around the sheet table (Esc = cancel): "),
+                    "گوشه‌ی اول مستطیل دور شیت‌ها را بزنید (Esc = لغو): ",
+                    "Pick the first corner of the window around the sheets (Esc = cancel): "),
+                ["sheet.pickBig2"] = (
+                    "گوشه‌ی مقابل را بزنید: ",
+                    "Pick the opposite corner: "),
                 ["sheet.bigInfo"] = (
-                    "مستطیل بزرگ: نوع {0}، لایه {1}، اندازه {2} × {3}",
-                    "Big rectangle: type {0}, layer {1}, size {2} x {3}"),
+                    "محدوده‌ی انتخابی: اندازه {0} × {1}",
+                    "Selected window: size {0} x {1}"),
                 ["sheet.frames"] = (
                     "کادرهای داخل مستطیل: {0} بلوک «{1}» و {2} پلی‌لاین روی لایه {3}",
                     "Frames inside: {0} blocks \"{1}\" and {2} polylines on layer {3}"),
