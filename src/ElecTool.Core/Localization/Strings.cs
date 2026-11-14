@@ -283,7 +283,43 @@ namespace ElecTool.Core.Localization
                     "Inserting the symbol failed: {0}"),
                 ["insert.notInLibrary"] = (
                     "نماد «{0}» در کتابخانه پیدا نشد. با ELECLIB اسم‌های کتابخانه را ببینید.",
-                    "Symbol \"{0}\" was not found in the library. Use ELECLIB to see the library names.")
+                    "Symbol \"{0}\" was not found in the library. Use ELECLIB to see the library names."),
+
+                // ───────── بررسی شیت‌ها (ELECSHEETINFO) ─────────
+
+                ["sheet.pickBig"] = (
+                    "روی خط مستطیل بزرگ دور جدول شیت‌ها کلیک کنید (Esc = لغو): ",
+                    "Click the line of the big rectangle around the sheet table (Esc = cancel): "),
+                ["sheet.bigInfo"] = (
+                    "مستطیل بزرگ: نوع {0}، لایه {1}، اندازه {2} × {3}",
+                    "Big rectangle: type {0}, layer {1}, size {2} x {3}"),
+                ["sheet.frames"] = (
+                    "کادرهای داخل مستطیل: {0} بلوک «{1}» و {2} پلی‌لاین روی لایه {3}",
+                    "Frames inside: {0} blocks \"{1}\" and {2} polylines on layer {3}"),
+                ["sheet.noFrames"] = (
+                    "کادری داخل این مستطیل پیدا نشد.",
+                    "No frame was found inside this rectangle."),
+                ["sheet.size"] = (
+                    "اندازه {0} × {1}: {2} عدد",
+                    "Size {0} x {1}: {2} frames"),
+                ["sheet.first"] = (
+                    "اولین کادر (بالا چپ): گوشه بالا چپ ({0}، {1})، نوع {2}",
+                    "First frame (top left): top-left corner ({0}, {1}), type {2}"),
+                ["sheet.insertInfo"] = (
+                    "بلوک اولین کادر: مقیاس {0}، زاویه {1} درجه",
+                    "First frame block: scale {0}, angle {1} degrees"),
+                ["sheet.pickTable"] = (
+                    "یک نقطه روی خط بالای جدول پایین اولین کادر کلیک کنید (Enter = رد کردن): ",
+                    "Click a point on the top line of the table at the bottom of the first frame (Enter = skip): "),
+                ["sheet.table"] = (
+                    "ارتفاع جدول پایین: {0} ({1} درصد ارتفاع کادر)",
+                    "Bottom table height: {0} ({1} percent of the frame height)"),
+                ["sheet.reportSaved"] = (
+                    "گزارش ذخیره شد: {0}",
+                    "Report saved: {0}"),
+                ["sheet.failed"] = (
+                    "بررسی شیت‌ها ناموفق بود: {0}",
+                    "Sheet check failed: {0}")
             };
     }
 }
