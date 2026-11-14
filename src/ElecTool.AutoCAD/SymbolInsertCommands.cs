@@ -24,8 +24,20 @@ namespace ElecTool.AutoCAD
         // آخرین نمادی که درج شد (پیش‌فرض دفعه بعد)
         private static string? _lastName;
 
+        /// <summary>ELECINSERT: نماد را از لیست شماره‌دار انتخاب می‌کند.</summary>
         [Acrt.CommandMethod("ELECINSERT")]
         public static void InsertSymbol()
+        {
+            Run(null);
+        }
+
+        /// <summary>برای میانبرها (مثل ELECSOC): نماد با نام مشخص، بدون لیست.</summary>
+        internal static void InsertByName(string symbolName)
+        {
+            Run(symbolName);
+        }
+
+        private static void Run(string? fixedName)
         {
             ElecRuntime.EnsureStarted();
 
@@ -68,12 +80,25 @@ namespace ElecTool.AutoCAD
                 return;
             }
 
-            // ۱) انتخاب نماد
-            string? name = PickSymbol(ed, names);
-            if (name == null)
+            // ۱) انتخاب نماد (میانبر: با نام؛ ELECINSERT: از لیست)
+            string? name;
+            if (fixedName != null)
             {
-                OperationRunner.Say(ed, OperationRunner.T("op.cancelled"));
-                return;
+                name = FindByName(names, fixedName);
+                if (name == null)
+                {
+                    OperationRunner.Say(ed, OperationRunner.T("insert.notInLibrary", fixedName));
+                    return;
+                }
+            }
+            else
+            {
+                name = PickSymbol(ed, names);
+                if (name == null)
+                {
+                    OperationRunner.Say(ed, OperationRunner.T("op.cancelled"));
+                    return;
+                }
             }
 
             // ۲) آوردن تعریف بلوک به نقشه (اگر نبود)
@@ -177,6 +202,32 @@ namespace ElecTool.AutoCAD
         }
 
         // ───────────────────────── انتخاب نماد ─────────────────────────
+
+        /// <summary>نام را بدون حساسیت به ی/ي، ک/ك، نیم‌فاصله و فاصله‌های اضافه پیدا می‌کند.</summary>
+        private static string? FindByName(List<string> names, string wanted)
+        {
+            string key = Normalize(wanted);
+            foreach (string candidate in names)
+            {
+                if (string.Equals(Normalize(candidate), key, StringComparison.Ordinal))
+                {
+                    return candidate;
+                }
+            }
+
+            return null;
+        }
+
+        private static string Normalize(string text)
+        {
+            return text
+                .Replace('\u064A', '\u06CC')
+                .Replace('\u0643', '\u06A9')
+                .Replace("\u200C", string.Empty)
+                .Replace(" ", string.Empty)
+                .Trim()
+                .ToLowerInvariant();
+        }
 
         private static string? PickSymbol(Editor ed, List<string> names)
         {
