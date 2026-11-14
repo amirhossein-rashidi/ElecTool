@@ -15,7 +15,7 @@ namespace ElecTool.AutoCAD
 {
     /// <summary>
     /// ELECSHEETINFO = فرمان فقط‌خواندنی (چیزی در نقشه تغییر نمی‌کند).
-    /// مستطیل بزرگ دور جدول شیت‌ها را می‌گیرد، کادرهای داخلش را می‌شمارد،
+    /// محدوده‌ی شیت‌ها را با دو گوشه می‌گیرد، کادرهای داخلش را می‌شمارد،
     /// اندازه‌ی کادرها و گوشه‌ی بالا چپ اولین کادر را می‌گوید و با یک کلیک
     /// ارتفاع جدول پایین کادر را اندازه می‌گیرد. گزارش در فایل هم ذخیره می‌شود.
     /// این اطلاعات برای ساخت فرمان تنظیم کادرها لازم است.
@@ -74,44 +74,40 @@ namespace ElecTool.AutoCAD
 
             try
             {
-                // ۱) مستطیل بزرگ
-                var pickOptions = new PromptEntityOptions("\n" + OperationRunner.T("sheet.pickBig"));
-                PromptEntityResult pick = ed.GetEntity(pickOptions);
-                if (pick.Status != PromptStatus.OK)
+                // ۱) محدوده‌ی شیت‌ها با دو گوشه (مستطیل از قبل لازم نیست)
+                var firstOptions = new PromptPointOptions("\n" + OperationRunner.T("sheet.pickBig"));
+                PromptPointResult firstCorner = ed.GetPoint(firstOptions);
+                if (firstCorner.Status != PromptStatus.OK)
                 {
                     OperationRunner.Say(ed, OperationRunner.T("op.cancelled"));
                     return;
                 }
 
-                Database db = doc.Database;
-                Extents3d big;
-                string bigType;
-                string bigLayer;
-
-                using (Transaction tr = db.TransactionManager.StartTransaction())
+                var secondOptions = new PromptCornerOptions("\n" + OperationRunner.T("sheet.pickBig2"), firstCorner.Value);
+                PromptPointResult secondCorner = ed.GetCorner(secondOptions);
+                if (secondCorner.Status != PromptStatus.OK)
                 {
-                    var bigEntity = tr.GetObject(pick.ObjectId, OpenMode.ForRead) as Entity;
-                    if (bigEntity == null)
-                    {
-                        OperationRunner.Say(ed, OperationRunner.T("sheet.failed", "entity"));
-                        return;
-                    }
-
-                    big = bigEntity.GeometricExtents;
-                    bigType = bigEntity.GetRXClass().DxfName;
-                    bigLayer = bigEntity.Layer;
-                    tr.Commit();
+                    OperationRunner.Say(ed, OperationRunner.T("op.cancelled"));
+                    return;
                 }
+
+                Matrix3d ucs = ed.CurrentUserCoordinateSystem;
+                Point3d cornerA = firstCorner.Value.TransformBy(ucs);
+                Point3d cornerB = secondCorner.Value.TransformBy(ucs);
+
+                var big = new Extents3d(
+                    new Point3d(Math.Min(cornerA.X, cornerB.X), Math.Min(cornerA.Y, cornerB.Y), 0),
+                    new Point3d(Math.Max(cornerA.X, cornerB.X), Math.Max(cornerA.Y, cornerB.Y), 0));
+
+                Database db = doc.Database;
 
                 Say(ed, report, OperationRunner.T(
                     "sheet.bigInfo",
-                    bigType,
-                    bigLayer,
                     Num(big.MaxPoint.X - big.MinPoint.X),
                     Num(big.MaxPoint.Y - big.MinPoint.Y)));
 
                 // ۲) کادرهای داخل مستطیل
-                List<FrameInfo> frames = FindFrames(db, pick.ObjectId, big);
+                List<FrameInfo> frames = FindFrames(db, big);
 
                 int blockCount = frames.Count(f => f.IsBlock);
                 int polyCount = frames.Count - blockCount;
@@ -194,7 +190,7 @@ namespace ElecTool.AutoCAD
 
         // ───────────────────────── کمکی‌ها ─────────────────────────
 
-        private static List<FrameInfo> FindFrames(Database db, ObjectId bigId, Extents3d big)
+        private static List<FrameInfo> FindFrames(Database db, Extents3d big)
         {
             var result = new List<FrameInfo>();
 
@@ -206,11 +202,6 @@ namespace ElecTool.AutoCAD
 
                 foreach (ObjectId id in space)
                 {
-                    if (id == bigId)
-                    {
-                        continue;
-                    }
-
                     var entity = tr.GetObject(id, OpenMode.ForRead) as Entity;
                     if (entity == null)
                     {
