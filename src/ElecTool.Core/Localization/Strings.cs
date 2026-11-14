@@ -280,7 +280,10 @@ namespace ElecTool.Core.Localization
                     "Finished inserting \"{0}\": {1} placed. To undo, type U."),
                 ["insert.failed"] = (
                     "درج نماد ناموفق بود: {0}",
-                    "Inserting the symbol failed: {0}")
+                    "Inserting the symbol failed: {0}"),
+                ["insert.notInLibrary"] = (
+                    "نماد «{0}» در کتابخانه پیدا نشد. با ELECLIB اسم‌های کتابخانه را ببینید.",
+                    "Symbol \"{0}\" was not found in the library. Use ELECLIB to see the library names.")
             };
     }
 }
