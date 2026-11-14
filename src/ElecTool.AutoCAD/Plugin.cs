@@ -13,6 +13,7 @@ using Acrt = Autodesk.AutoCAD.Runtime;
 [assembly: Acrt.CommandClass(typeof(ElecTool.AutoCAD.SymbolLibraryDeleteCommands))]
 [assembly: Acrt.CommandClass(typeof(ElecTool.AutoCAD.SymbolInsertCommands))]
 [assembly: Acrt.CommandClass(typeof(ElecTool.AutoCAD.SymbolShortcutCommands))]
+[assembly: Acrt.CommandClass(typeof(ElecTool.AutoCAD.SheetInfoCommands))]
 
 namespace ElecTool.AutoCAD
 {
